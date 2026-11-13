@@ -2,19 +2,20 @@
 
 ## Project Overview
 
-This project performs Exploratory Data Analysis (EDA) on the IBM Telco Customer Churn dataset to understand customer behaviour and identify the factors associated with customer churn.
+This project performs Exploratory Data Analysis (EDA) on the IBM Telco Customer Churn dataset to understand customer behaviour and identify factors associated with customer churn.
 
-The main objective is to explore customer information, service usage, contract types, payment methods and billing details to discover patterns that may help a telecommunications company improve customer retention.
+The main objective is to explore customer demographics, subscribed services, contract types, payment methods and billing information to discover patterns that can help a telecommunications company improve customer retention.
 
-## Objectives
+## Project Objectives
 
 - Understand the distribution of customers who stayed and churned.
 - Analyse numerical and categorical features.
 - Identify customer groups with higher churn rates.
-- Explore relationships between customer tenure, charges and churn.
-- Generate meaningful business insights from the data.
+- Explore relationships between tenure, monthly charges and churn.
+- Identify important factors associated with customer churn.
+- Generate meaningful business insights.
 
-## Dataset
+## Dataset Information
 
 **Dataset:** IBM Telco Customer Churn
 
@@ -22,9 +23,9 @@ The main objective is to explore customer information, service usage, contract t
 - Total original columns: 21
 - Target variable: `Churn`
 
-The dataset contains customer demographics, subscribed services, contract information, payment methods and billing details.
+The dataset contains customer demographics, subscribed services, contract details, payment methods and billing information.
 
-## Technologies and Libraries
+## Technologies Used
 
 - Python
 - Jupyter Notebook
@@ -46,85 +47,100 @@ The dataset contains customer demographics, subscribed services, contract inform
 9. Multivariate analysis and correlation
 10. Business insights and conclusion
 
-## Key Findings
+---
 
-### 1. Customer Churn Distribution
+# Exploratory Data Analysis and Visualizations
 
+## 1. Customer Churn Distribution
+
+This chart shows the distribution of customers who stayed and customers who churned.
+
+**Key Findings:**
 - 73.5% of customers stayed.
 - 26.5% of customers churned.
 
 ![Churn Distribution](images/churn_distribution.png)
 
-### 2. Numerical Feature Distributions
+## 2. Numerical Features Distribution
 
-Explored the distributions of customer tenure, monthly charges and total charges.
+This section explores the distributions of the numerical features: tenure, MonthlyCharges and TotalCharges.
 
-![Numerical Feature Distributions](images/numerical_features_distribution.png)
+![Numerical Features Distribution](images/numerical_features_distribution.png)
 
-### 3. Churn by Customer Services
+## 3. Churn Rate by Customer Services
 
-Compared churn rates across contract types, internet services and payment methods.
+This comparison explores churn rates across contract types, internet services and payment methods.
 
-Key findings:
+**Key Findings:**
 - Month-to-month contracts have the highest churn rate (42.71%).
 - Fiber optic customers have a high churn rate (41.89%).
 - Electronic check users have the highest churn rate (45.29%).
 
+**Business Insight:** The company should focus on retaining month-to-month customers, reviewing fiber optic service satisfaction and improving the payment experience.
+
 ![Churn by Customer Services](images/churn_by_customer_services.png)
 
-### 4. Numerical Features vs Churn
+## 4. Numerical Features vs Customer Churn
 
-Compared tenure, monthly charges and total charges between customers who stayed and customers who churned.
+This analysis compares tenure, monthly charges and total charges between customers who stayed and customers who churned.
 
-Key findings:
+**Key Findings:**
 - Customers who churned generally have shorter tenure.
 - Customers who churned have higher average monthly charges.
 - Customers who stayed have higher average total charges.
 
 ![Numerical Features vs Churn](images/numerical_features_vs_churn.png)
 
-### 5. Churn Rate by Tenure Group
+## 5. Tenure Distribution by Churn
 
-Customers with shorter tenure show higher churn rates.
+This chart compares the tenure distributions of customers who stayed and customers who churned.
 
-![Churn by Tenure Group](images/churn_by_tenure_group.png)
-
-### 6. Tenure Distribution by Churn
-
-This chart compares customer tenure distributions for customers who stayed and customers who churned.
+**Key Finding:** Customers who churned are more concentrated in the lower tenure range, suggesting that early customer retention is important.
 
 ![Tenure Distribution by Churn](images/tenure_distribution_by_churn.png)
 
-### 7. Correlation Heatmap
+## 6. Churn Rate by Tenure Group
 
-The correlation analysis highlights relationships between numerical features.
+Customers are divided into four tenure groups to compare their churn rates.
 
-Key observations:
+**Key Finding:** Customers with shorter tenure have higher churn rates. The 0–12 month group shows the highest churn rate.
+
+![Churn Rate by Tenure Group](images/churn_by_tenure_group.png)
+
+## 7. Tenure by Contract Type
+
+This violin plot compares customer tenure across month-to-month, one-year and two-year contracts.
+
+**Key Finding:** Customers with longer-term contracts generally show longer tenure.
+
+![Tenure by Contract](images/tenure_by_contract.png)
+
+## 8. Tenure vs Monthly Charges
+
+This scatter plot explores the relationship between customer tenure and monthly charges, with customers differentiated by churn status.
+
+![Tenure vs Monthly Charges](images/tenure_vs_monthly_charges.png)
+
+## 9. Numerical Features Pairplot
+
+The pairplot visualises relationships between tenure, monthly charges and total charges, with customers grouped by churn status.
+
+![Numerical Features Pairplot](images/numerical_features_pairplot.png)
+
+## 10. Correlation Heatmap
+
+The correlation heatmap displays relationships between numerical features.
+
+**Key Findings:**
 - Tenure and TotalCharges have a strong positive correlation (0.83).
 - MonthlyCharges and TotalCharges have a positive correlation (0.65).
 - Tenure and Churn_flag have a negative correlation (-0.35).
 
 ![Correlation Heatmap](images/correlation_heatmap.png)
 
-### 8. Tenure vs Monthly Charges
+---
 
-This scatter plot explores the relationship between customer tenure and monthly charges, with customers grouped by churn status.
-
-![Tenure vs Monthly Charges](images/tenure_vs_monthly_charges.png)
-
-### 9. Tenure by Contract Type
-
-The violin plot compares customer tenure across month-to-month, one-year and two-year contracts.
-
-![Tenure by Contract](images/tenure_by_contract.png)
-
-### 10. Numerical Features Pairplot
-
-The pairplot visualises relationships between tenure, monthly charges and total charges, separated by churn status.
-
-![Numerical Features Pairplot](images/numerical_features_pairplot.png)
-
-## Business Insights
+## Key Business Insights
 
 Based on the analysis:
 
@@ -136,7 +152,7 @@ Based on the analysis:
 
 ## Conclusion
 
-The analysis shows that customer churn is associated with contract type, tenure, internet service, payment method and billing patterns.
+The analysis highlights several patterns associated with customer churn, including contract type, tenure, internet service, payment method and billing patterns.
 
 Customers with month-to-month contracts, shorter tenure, fiber optic services and electronic check payments show comparatively higher churn rates.
 
@@ -152,12 +168,12 @@ telco-customer-churn-eda/
 │   ├── numerical_features_distribution.png
 │   ├── churn_by_customer_services.png
 │   ├── numerical_features_vs_churn.png
-│   ├── churn_by_tenure_group.png
 │   ├── tenure_distribution_by_churn.png
-│   ├── correlation_heatmap.png
-│   ├── tenure_vs_monthly_charges.png
+│   ├── churn_by_tenure_group.png
 │   ├── tenure_by_contract.png
-│   └── numerical_features_pairplot.png
+│   ├── tenure_vs_monthly_charges.png
+│   ├── numerical_features_pairplot.png
+│   └── correlation_heatmap.png
 │
 ├── Telco_Customer_Churn_EDA.ipynb
 └── README.md
@@ -165,31 +181,33 @@ telco-customer-churn-eda/
 
 ## How to Run the Project
 
-1. Clone this repository:
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/sandravinod-web/telco-customer-churn-eda.git
 ```
 
-2. Open the project folder:
+**2. Navigate to the project folder**
 
 ```bash
 cd telco-customer-churn-eda
 ```
 
-3. Install the required libraries:
+**3. Install the required libraries**
 
 ```bash
 pip install pandas numpy matplotlib seaborn jupyter
 ```
 
-4. Open Jupyter Notebook:
+**4. Launch Jupyter Notebook**
 
 ```bash
 jupyter notebook
 ```
 
-5. Open `Telco_Customer_Churn_EDA.ipynb` and run the cells.
+**5. Open and run**
+
+Open `Telco_Customer_Churn_EDA.ipynb` and execute the notebook cells.
 
 **Note:** Download the IBM Telco Customer Churn CSV dataset separately and place it in the location expected by the notebook.
 
