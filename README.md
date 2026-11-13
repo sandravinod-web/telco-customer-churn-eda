@@ -63,3 +63,18 @@ This chart compares customer churn rates across different contract types, intern
 
 **Business Insight:**
 The company should focus on retaining month-to-month customers, reviewing fiber optic service satisfaction and improving the electronic payment experience.
+
+
+
+## Numerical Features vs Customer Churn
+
+![Numerical Features vs Churn](images/numerical_features_vs_churn.png)
+
+**Key Findings:**
+- Customers who churned generally have shorter tenure.
+- Customers who churned have higher monthly charges on average.
+- Customers who stayed have higher total charges on average.
+
+**Business Insight:**
+
+The company should focus on improving early customer retention and reviewing pricing strategies to reduce churn.
