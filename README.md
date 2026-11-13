@@ -40,3 +40,11 @@ Open `Telco_Customer_Churn_EDA.ipynb` to explore the complete analysis and visua
 Sandra V
 
 Aspiring Data Scientist | Python | SQL | Data Analysis | Machine Learning
+
+## Churn Distribution
+
+This chart shows the distribution of customers who stayed and customers who churned.
+
+![Churn Distribution](images/churn_distribution.png)
+
+**Key finding:** 26.5% of customers churned, while 73.5% stayed.
