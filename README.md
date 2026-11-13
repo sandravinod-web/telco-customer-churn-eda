@@ -12,9 +12,9 @@ The objective is to explore customer demographics, subscribed services, contract
 - **Contract type:** Month-to-month customers have the highest churn rate (42.71%), compared with 11.27% for one-year contracts and 2.83% for two-year contracts.
 - **Customer tenure:** Customers in their first 12 months have the highest churn rate (about 47.4%), compared with about 9.5% for customers with more than 48 months of tenure.
 - **Internet service:** Fiber optic customers have a churn rate of 41.89%, compared with 18.96% for DSL customers.
-- **Payment method:** Electronic check users have the highest churn rate (45.29%).
-- **Technical support:** Customers without Tech Support have a higher churn rate than customers who subscribe to it.
-- **Online security:** Customers without Online Security also show a higher churn rate.
+- **Payment method:** Electronic check users have the highest churn rate (45.29%), compared with about 15–17% for automatic payment methods.
+- **Technical support:** Among customers with internet service, those without Tech Support have a higher churn rate (about 41.6%) than those who subscribe to it (about 15.2%).
+- **Online security:** Among customers with internet service, those without Online Security also show a higher churn rate (about 41.8%) than those who subscribe (about 14.6%).
 
 ## Project Objectives
 
@@ -54,21 +54,22 @@ The dataset contains customer demographics, subscribed services, contract detail
 3. Understanding the dataset
 4. Data quality assessment
 5. Data cleaning and preprocessing
-6. Univariate analysis
-7. Outlier detection using the IQR method
+6. Outlier detection using the IQR method
+7. Univariate analysis
 8. Bivariate analysis
 9. Multivariate analysis and correlation
-10. Business insights and conclusion
+10. Business questions
+11. Business insights and conclusion
 
 ## Data Cleaning Highlights
 
 - Identified 11 blank values in `TotalCharges`. All 11 belong to customers with `tenure = 0` (new customers with no charges yet), so for this analysis they were treated as 0 and the column was converted to float.
 - No duplicate rows or duplicate customer IDs were found.
-- `SeniorCitizen` was represented as a categorical feature (No/Yes) for categorical analysis.
-- "No internet service" and "No phone service" were retained as valid categories.
+- `SeniorCitizen` was converted from 0/1 to No/Yes for categorical analysis.
+- "No internet service" and "No phone service" were kept as separate categories, because these customers do not have the service at all, which is different from customers who have the service but chose "No".
 - A numeric `Churn_flag` column was created (Yes = 1, No = 0) for churn-rate calculations and correlation analysis.
-- A numeric `SeniorCitizen_flag` column was used for correlation analysis.
-- The IQR (1.5 × IQR) method was used to identify potential outliers in numerical features.
+- A numeric `SeniorCitizen_flag` column was created so that `SeniorCitizen` could be included in the correlation heatmap.
+- The IQR (1.5 × IQR) rule found no potential outliers in `tenure`, `MonthlyCharges` or `TotalCharges`, so no outlier treatment was applied.
 
 ---
 
@@ -79,8 +80,9 @@ The dataset contains customer demographics, subscribed services, contract detail
 This chart shows the distribution of customers who stayed and customers who churned.
 
 **Key Findings:**
-- 73.5% of customers stayed.
-- 26.5% of customers churned.
+- 73.5% of customers stayed (5,174 customers).
+- 26.5% of customers churned (1,869 customers).
+- The data is imbalanced, with more customers staying than leaving.
 
 ![Churn Distribution](images/churn_distribution.png)
 
@@ -89,20 +91,20 @@ This chart shows the distribution of customers who stayed and customers who chur
 This section explores the distributions of tenure, MonthlyCharges and TotalCharges.
 
 **Key Findings:**
-- Tenure shows a concentration of both new and long-term customers.
-- MonthlyCharges has multiple distribution patterns.
+- Tenure has two clear peaks: many new customers (0–5 months) and many long-term customers (about 70 months).
+- MonthlyCharges has a large group at the low end (around 20) and another larger group between about 70 and 100.
 - TotalCharges is right-skewed, with many customers having relatively low total charges.
 
 ![Numerical Features Distribution](images/numerical_features_distribution.png)
 
 ## 3. Churn Rate by Customer Services
 
-This comparison explores churn rates across contract types, internet services and payment methods.
+This comparison explores churn rates across contract types, internet services and payment methods. In the internet service chart, "No" means the customer has no internet service.
 
 **Key Findings:**
-- Month-to-month contracts have the highest churn rate (42.71%).
-- Fiber optic customers have a high churn rate (41.89%).
-- Electronic check users have the highest churn rate (45.29%).
+- Month-to-month contracts have the highest churn rate (42.71%), compared with 11.27% (one year) and 2.83% (two year).
+- Fiber optic customers have the highest churn rate among internet service groups (41.89%), compared with 18.96% for DSL and 7.40% for customers with no internet service.
+- Electronic check users have the highest churn rate (45.29%), while automatic payment methods are about 15–17% and mailed check is about 19%.
 
 **Business Insight:** The company should focus on retaining month-to-month customers, reviewing fiber optic service satisfaction and improving the payment experience.
 
@@ -113,9 +115,11 @@ This comparison explores churn rates across contract types, internet services an
 This analysis compares tenure, monthly charges and total charges between customers who stayed and customers who churned.
 
 **Key Findings:**
-- Customers who churned generally have shorter tenure.
+- Customers who churned generally have shorter tenure (median 10 months compared with 38 months).
 - Customers who churned have higher average monthly charges (approximately 74.44 compared with 61.27).
-- Customers who stayed have higher average total charges.
+- Customers who stayed have higher total charges (average about 2,550 compared with 1,532), mainly because they stay longer.
+
+**Note:** Each box plot calculates its whiskers separately for each group, so a few churned-customer points (mainly in tenure and TotalCharges) appear beyond the whiskers. This is different from the IQR check on the full columns, which found no potential outliers.
 
 ![Numerical Features vs Churn](images/numerical_features_vs_churn.png)
 
@@ -123,7 +127,7 @@ This analysis compares tenure, monthly charges and total charges between custome
 
 This chart compares the tenure distributions of customers who stayed and customers who churned.
 
-**Key Finding:** Customers who churned are more concentrated in the lower tenure range, suggesting that early customer retention is important.
+**Key Finding:** Customers who churned are more concentrated in the lower tenure range, and the number of churned customers falls steadily as tenure increases, suggesting that early customer retention is important.
 
 ![Tenure Distribution by Churn](images/tenure_distribution_by_churn.png)
 
@@ -131,7 +135,7 @@ This chart compares the tenure distributions of customers who stayed and custome
 
 Customers are divided into four tenure groups to compare their churn rates.
 
-**Key Finding:** Customers with shorter tenure have higher churn rates. The 0–12 month group shows the highest churn rate (about 47.4%), falling to about 9.5% for customers with more than 48 months of tenure.
+**Key Finding:** Churn falls steadily as tenure increases: about 47.4% for 0–12 months, 28.7% for 13–24 months, 20.4% for 25–48 months and 9.5% for 49–72 months.
 
 ![Churn Rate by Tenure Group](images/churn_by_tenure_group.png)
 
@@ -139,7 +143,7 @@ Customers are divided into four tenure groups to compare their churn rates.
 
 This violin plot compares customer tenure across month-to-month, one-year and two-year contracts.
 
-**Key Finding:** Customers with longer-term contracts generally show longer tenure.
+**Key Finding:** Customers with longer-term contracts generally show longer tenure. The median tenure is 12 months for month-to-month, 44 months for one-year and 64 months for two-year contracts.
 
 ![Tenure by Contract](images/tenure_by_contract.png)
 
@@ -147,7 +151,7 @@ This violin plot compares customer tenure across month-to-month, one-year and tw
 
 This scatter plot explores the relationship between customer tenure and monthly charges, with customers differentiated by churn status.
 
-**Key Finding:** Churned customers appear more concentrated among customers with shorter tenure and higher monthly charges.
+**Key Finding:** Churned customers appear more concentrated among customers with shorter tenure and higher monthly charges. Many points overlap, so this plot is best read together with the box plots in Section 4.
 
 ![Tenure vs Monthly Charges](images/tenure_vs_monthly_charges.png)
 
@@ -158,17 +162,20 @@ The pairplot visualises relationships between tenure, monthly charges and total 
 **Key Findings:**
 - TotalCharges increases strongly with tenure.
 - Churned customers are more concentrated at lower tenure and lower total charges.
+- Churned customers show a peak at higher monthly charges (roughly 70–100).
 
 ![Numerical Features Pairplot](images/numerical_features_pairplot.png)
 
 ## 10. Correlation Heatmap
 
-The correlation heatmap displays relationships between numerical features.
+The correlation heatmap displays relationships between numerical features, including the numeric `Churn_flag` and `SeniorCitizen_flag`.
 
 **Key Findings:**
 - Tenure and TotalCharges have a strong positive correlation (0.83).
 - MonthlyCharges and TotalCharges have a positive correlation (0.65).
 - Tenure and Churn_flag have a negative correlation (-0.35).
+- MonthlyCharges and Churn_flag have a small positive correlation (0.19).
+- SeniorCitizen_flag and Churn_flag have a small positive correlation (0.15).
 
 **Note:** Correlation shows association, not causation.
 
