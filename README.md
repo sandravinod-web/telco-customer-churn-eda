@@ -4,17 +4,17 @@
 
 This project performs Exploratory Data Analysis (EDA) on the IBM Telco Customer Churn dataset to understand customer behaviour and identify factors associated with customer churn.
 
-The main objective is to explore customer demographics, subscribed services, contract types, payment methods and billing information to discover patterns that can help a telecommunications company improve customer retention.
+The objective is to explore customer demographics, subscribed services, contract types, payment methods and billing information to discover patterns that can help a telecommunications company improve customer retention.
 
 ## Summary of Key Findings
 
-- **26.5%** of customers churned (1,869 of 7,043).
-- **Contract type** shows the largest differences in churn: month-to-month customers churn at **42.7%**, compared with 11.3% (one-year) and 2.8% (two-year).
-- **New customers are at the highest risk:** about **47.4%** of customers in their first 12 months churned, compared with about **9.5%** for customers with more than 48 months of tenure.
-- **Fiber optic** customers churn at **41.9%**, higher than DSL (19.0%), even though they pay the highest average monthly charges.
-- **Electronic check** users churn at **45.3%**, compared with about 15–17% for automatic payment methods.
-- The highest-risk group is **month-to-month fiber optic customers** (about 54.6% churn).
-- Among customers with internet service, those **without Tech Support or Online Security** churn at about **42%**, compared with about **15%** for those who subscribe to these services.
+- **26.5%** of customers churned (1,869 out of 7,043).
+- **Contract type:** Month-to-month customers have the highest churn rate (42.71%), compared with 11.27% for one-year contracts and 2.83% for two-year contracts.
+- **Customer tenure:** Customers in their first 12 months have the highest churn rate (about 47.4%), compared with about 9.5% for customers with more than 48 months of tenure.
+- **Internet service:** Fiber optic customers have a churn rate of 41.89%, compared with 18.96% for DSL customers.
+- **Payment method:** Electronic check users have the highest churn rate (45.29%).
+- **Technical support:** Customers without Tech Support have a higher churn rate than customers who subscribe to it.
+- **Online security:** Customers without Online Security also show a higher churn rate.
 
 ## Project Objectives
 
@@ -27,14 +27,14 @@ The main objective is to explore customer demographics, subscribed services, con
 
 ## Dataset Information
 
-**Dataset:** IBM Telco Customer Churn (sample dataset published on Kaggle)
+**Dataset:** IBM Telco Customer Churn
 
-**Source:** https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+**Source:** [Kaggle – Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 
 - Total records: 7,043 customers
 - Total original columns: 21
 - Target variable: `Churn`
-- File name used in this project: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
+- Dataset file: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
 
 The dataset contains customer demographics, subscribed services, contract details, payment methods and billing information.
 
@@ -62,12 +62,13 @@ The dataset contains customer demographics, subscribed services, contract detail
 
 ## Data Cleaning Highlights
 
-- Found 11 blank `TotalCharges` values. All belong to customers with `tenure = 0`, so for this analysis they were treated as 0 and the column was converted to float.
-- No duplicate rows or other missing values were found.
-- `SeniorCitizen` was converted from 0/1 to No/Yes to match the other categorical columns.
-- "No internet service" and "No phone service" were kept as separate categories, because these customers do not have the service at all, which is different from customers who have the service but chose "No".
-- A numeric `Churn_flag` column (Yes = 1, No = 0) was created to calculate churn rates and correlations.
-- The IQR (1.5 × IQR) rule found no potential outliers in `tenure`, `MonthlyCharges` or `TotalCharges`, so no outlier treatment was applied.
+- Identified 11 blank values in `TotalCharges`. All 11 belong to customers with `tenure = 0`. These values were converted to missing values (`NaN`) and retained rather than replaced with zero.
+- No duplicate rows or duplicate customer IDs were found.
+- `SeniorCitizen` was represented as a categorical feature (No/Yes) for categorical analysis.
+- "No internet service" and "No phone service" were retained as valid categories.
+- A numeric `Churn_flag` column was created (Yes = 1, No = 0) for churn-rate calculations and correlation analysis.
+- A numeric `SeniorCitizen_flag` column was used for correlation analysis.
+- The IQR (1.5 × IQR) method was used to identify potential outliers in numerical features.
 
 ---
 
@@ -85,9 +86,12 @@ This chart shows the distribution of customers who stayed and customers who chur
 
 ## 2. Numerical Features Distribution
 
-This section explores the distributions of the numerical features: tenure, MonthlyCharges and TotalCharges.
+This section explores the distributions of tenure, MonthlyCharges and TotalCharges.
 
-**Key Finding:** Tenure has two clear groups: many new customers and many long-term customers. TotalCharges is right-skewed because most customers have a lower tenure.
+**Key Findings:**
+- Tenure shows a concentration of both new and long-term customers.
+- MonthlyCharges has multiple distribution patterns.
+- TotalCharges is right-skewed, with many customers having relatively low total charges.
 
 ![Numerical Features Distribution](images/numerical_features_distribution.png)
 
@@ -110,7 +114,7 @@ This analysis compares tenure, monthly charges and total charges between custome
 
 **Key Findings:**
 - Customers who churned generally have shorter tenure.
-- Customers who churned have higher average monthly charges (about 74.4 compared with 61.3).
+- Customers who churned have higher average monthly charges (approximately 74.44 compared with 61.27).
 - Customers who stayed have higher average total charges.
 
 ![Numerical Features vs Churn](images/numerical_features_vs_churn.png)
@@ -143,7 +147,7 @@ This violin plot compares customer tenure across month-to-month, one-year and tw
 
 This scatter plot explores the relationship between customer tenure and monthly charges, with customers differentiated by churn status.
 
-**Key Finding:** Churned customers are concentrated among customers with shorter tenure and higher monthly charges.
+**Key Finding:** Churned customers appear more concentrated among customers with shorter tenure and higher monthly charges.
 
 ![Tenure vs Monthly Charges](images/tenure_vs_monthly_charges.png)
 
@@ -151,7 +155,9 @@ This scatter plot explores the relationship between customer tenure and monthly 
 
 The pairplot visualises relationships between tenure, monthly charges and total charges, with customers grouped by churn status.
 
-**Key Finding:** TotalCharges increases with tenure, and churned customers are concentrated at lower tenure and lower total charges.
+**Key Findings:**
+- TotalCharges increases strongly with tenure.
+- Churned customers are more concentrated at lower tenure and lower total charges.
 
 ![Numerical Features Pairplot](images/numerical_features_pairplot.png)
 
@@ -174,11 +180,11 @@ The correlation heatmap displays relationships between numerical features.
 
 Based on the analysis:
 
-- Focus on improving retention among month-to-month contract customers, for example by offering benefits for moving to longer contracts.
+- Focus on improving retention among month-to-month contract customers by offering benefits for moving to longer contracts.
 - Give new customers extra attention during their first 12 months, when churn is highest.
 - Investigate customer satisfaction and pricing for fiber optic services.
 - Review the customer experience for electronic check users and encourage automatic payment methods.
-- Promote Tech Support and Online Security bundles, and test whether they reduce churn.
+- Promote Tech Support and Online Security bundles, and evaluate whether they help reduce churn.
 - Monitor customers with higher monthly charges who may be at risk of leaving.
 
 ## Conclusion
@@ -189,9 +195,11 @@ Customers with month-to-month contracts, shorter tenure, fiber optic services an
 
 These findings can help the company develop targeted customer retention strategies and improve customer satisfaction.
 
-## Limitations
+## Limitations and Future Scope
 
-This analysis shows associations between customer characteristics and churn, not causes. The dataset also has no time information, so it cannot show when or why each customer left. A predictive model, such as logistic regression, would be a sensible next step to measure the effect of each factor.
+This analysis identifies associations between customer characteristics and churn, not causes. The dataset does not contain detailed time information explaining when or why each customer left.
+
+A possible next step is to build a machine learning model, such as Logistic Regression or Random Forest, to predict customer churn and evaluate model performance.
 
 ## Repository Structure
 
@@ -217,38 +225,37 @@ telco-customer-churn-eda/
 
 ## How to Run the Project
 
-**1. Clone the repository**
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/sandravinod-web/telco-customer-churn-eda.git
 ```
 
-**2. Navigate to the project folder**
+### 2. Navigate to the project folder
 
 ```bash
 cd telco-customer-churn-eda
 ```
 
-**3. Install the required libraries**
+### 3. Install the required libraries
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**4. Download the dataset**
+### 4. Download the dataset
 
-Download the IBM Telco Customer Churn dataset from Kaggle:
-https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+Download the IBM Telco Customer Churn dataset from [Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn).
 
 Save the file as `WA_Fn-UseC_-Telco-Customer-Churn.csv` in the same folder as the notebook.
 
-**5. Launch Jupyter Notebook**
+### 5. Launch Jupyter Notebook
 
 ```bash
 jupyter notebook
 ```
 
-**6. Open and run**
+### 6. Open and run
 
 Open `Telco_Customer_Churn_EDA.ipynb` and run all cells.
 
