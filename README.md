@@ -93,13 +93,15 @@ This chart analyses customer churn across four tenure groups.
 
 ## Correlation Heatmap
 
-The correlation heatmap shows the relationships between numerical variables in the dataset.
+The correlation heatmap illustrates the relationships between numerical features and customer churn.
 
 ![Correlation Heatmap](images/correlation_heatmap.png)
 
-**Key Findings:**
-- Tenure and TotalCharges have a strong positive correlation.
-- MonthlyCharges and TotalCharges have a positive correlation.
-- SeniorCitizen has a relatively weak correlation with most numerical features.
+### Key Findings
+- Tenure and TotalCharges have a strong positive correlation (0.83).
+- MonthlyCharges and TotalCharges have a positive correlation (0.65).
+- Tenure and Churn have a negative correlation (-0.35).
+- MonthlyCharges and Churn have a weak positive correlation (0.19).
 
-**Business Insight:** Customer tenure and billing-related variables are useful for understanding customer behaviour and should be considered in further churn analysis.
+### Business Insight
+Customer tenure is an important factor to examine when understanding churn patterns. The company should focus on improving early customer retention and monitoring customers with shorter tenure.
