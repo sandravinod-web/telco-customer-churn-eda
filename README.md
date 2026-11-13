@@ -89,3 +89,17 @@ This chart analyses customer churn across four tenure groups.
 **Key Finding:** Customers with 0–12 months of tenure have the highest churn rate (approximately 47.4%). Churn decreases as customer tenure increases.
 
 **Business Insight:** The company should focus on onboarding, customer support, and retention offers during the first year to reduce early customer churn.
+
+
+## Correlation Heatmap
+
+The correlation heatmap shows the relationships between numerical variables in the dataset.
+
+![Correlation Heatmap](images/correlation_heatmap.png)
+
+**Key Findings:**
+- Tenure and TotalCharges have a strong positive correlation.
+- MonthlyCharges and TotalCharges have a positive correlation.
+- SeniorCitizen has a relatively weak correlation with most numerical features.
+
+**Business Insight:** Customer tenure and billing-related variables are useful for understanding customer behaviour and should be considered in further churn analysis.
