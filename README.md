@@ -63,7 +63,7 @@ The dataset contains customer demographics, subscribed services, contract detail
 
 ## Data Cleaning Highlights
 
-- Identified 11 blank values in `TotalCharges`. All 11 belong to customers with `tenure = 0` (new customers with no charges yet), so for this analysis they were treated as 0 and the column was converted to float.
+- Identified 11 blank values in `TotalCharges`. All 11 belong to customers with `tenure = 0`. For this analysis, these blank values were treated as 0, and the column was converted to float.
 - No duplicate rows or duplicate customer IDs were found.
 - `SeniorCitizen` was converted from 0/1 to No/Yes for categorical analysis.
 - "No internet service" and "No phone service" were kept as separate categories, because these customers do not have the service at all, which is different from customers who have the service but chose "No".
