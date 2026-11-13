@@ -78,3 +78,14 @@ The company should focus on retaining month-to-month customers, reviewing fiber 
 **Business Insight:**
 
 The company should focus on improving early customer retention and reviewing pricing strategies to reduce churn.
+
+
+## Churn Rate by Tenure Group
+
+This chart analyses customer churn across four tenure groups.
+
+![Churn Rate by Tenure Group](images/churn_by_tenure_group.png)
+
+**Key Finding:** Customers with 0–12 months of tenure have the highest churn rate (approximately 47.4%). Churn decreases as customer tenure increases.
+
+**Business Insight:** The company should focus on onboarding, customer support, and retention offers during the first year to reduce early customer churn.
