@@ -48,3 +48,18 @@ This chart shows the distribution of customers who stayed and customers who chur
 ![Churn Distribution](images/churn_distribution.png)
 
 **Key finding:** 26.5% of customers churned, while 73.5% stayed.
+
+
+## Churn Rate by Contract, Internet Service and Payment Method
+
+This chart compares customer churn rates across different contract types, internet services and payment methods.
+
+![Churn Rate by Customer Services](images/churn_by_customer_services.png)
+
+**Key Findings:**
+- Month-to-month contracts have the highest churn rate (42.71%).
+- Fiber optic customers show a high churn rate (41.89%).
+- Electronic check users have the highest churn rate (45.29%).
+
+**Business Insight:**
+The company should focus on retaining month-to-month customers, reviewing fiber optic service satisfaction and improving the electronic payment experience.
